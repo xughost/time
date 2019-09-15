@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        .bbox {
+            width: 500px;
+            height: 100px;
+            margin: 100px auto;
+        }
+        .bbox div {
+            display: inline-block;
+            width: 100px;
+            height: 60px;
+            background-color: #e91e63;
+            color: #fff;
+            font-size: 40px;
+            text-align: center;
+            line-height: 60px;
+        }
+        .bbox .box {
+            background-color: #fff;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="bbox">
+        <div class="box">天</div>
+        <div class="box">时</div>
+        <div class="box">分</div>
+        <div class="box">秒</div>
+        <div class="day"></div>  
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="second"></div>
+    </div>
+    <script>
+        //获取元素
+        var day = document.querySelector('.day');
+        var hour = document.querySelector('.hour');
+        var minute = document.querySelector('.minute');
+        var second = document.querySelector('.second');
+        var inputTime = +new Date('2017-4-28 08:00:00');//输入的时间戳
+        //注册事件处理
+        //设置计时器
+        setInterval(fn, 1000);
+        function fn() {
+            var nowTime = +new Date();//现在的时间戳
+            var times = (nowTime - inputTime) / 1000; //时间戳之差的秒数
+
+            var s = parseInt(times % 60); // 当前的秒
+            s = s < 10 ? '0' + s : s;
+            second.innerHTML = s;  //将秒数赋值给second盒子
+
+            var m = parseInt(times / 60 % 60); // 分
+            m = m < 10 ? '0' + m : m;
+            minute.innerHTML = m;  //分钟数赋值给minute盒子
+
+            var h = parseInt(times / 60 / 60 % 24);  //小时
+            h = h < 10 ? '0' + h : h;
+            hour.innerHTML = h;  //算出的小时数赋值给hour盒子
+
+            var d = parseInt(times / 60 / 60 / 24); //天数
+            d = d < 10 ? '0' + d : d;
+            day.innerHTML = d;  //将天数赋值给day盒子
+        }
+
+    </script>
+</body>
+</html>
